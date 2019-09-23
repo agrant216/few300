@@ -1,0 +1,8 @@
+<header class="page-hee">
+  <h3>Holidays</h3>
+</header>
+<section>
+  <app-holiday-entry></app-holiday-entry>
+  <app-sort-filter></app-sort-filter>
+  <app-holiday-list [model]="holidays$ | async"></app-holiday-list>
+</section>

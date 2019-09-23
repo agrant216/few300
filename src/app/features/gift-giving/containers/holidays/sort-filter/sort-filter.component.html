@@ -1,0 +1,12 @@
+<div class="btn-group"
+     role="group"
+     aria-label="Basic example">
+  <button type="button"
+          (click)="viewAll()"
+          [disabled]="(showAll$ | async)"
+          class="btn btn-secondary">View All</button>
+  <button type="button"
+          (click)="showOnlyUpcoming()"
+          [disabled]="!(showAll$ | async)"
+          class="btn btn-secondary">Only Upcoming</button>
+</div>
