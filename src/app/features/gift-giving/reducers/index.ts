@@ -25,7 +25,7 @@ const selectUiHintsBranch = createSelector(selectFeature, b => b.uiHints);
 // 'Helpers'
 const selectHolidayArray = createSelector(selectHolidaysBranch, fromHolidays.selectHolidayArray);
 export const selectShowAllHolidays = createSelector(selectUiHintsBranch, b => b.showAll);
-
+export const selectSortingHolidaysBy = createSelector(selectUiHintsBranch, b => b.sortHolidaysBy);
 // Then what your componenst need.
 
 // we need one that returns a HolidayListItem for our holiday list component
@@ -39,6 +39,17 @@ const selectHolidayListItemsUnFiltered = createSelector(selectHolidayArray, holi
   } as HolidayListItem))
 );
 
-export const selectHolidayListItems = createSelector(selectShowAllHolidays, selectHolidayListItemsUnFiltered, (all, holidays) =>
+const selectHolidayListSorted = createSelector(selectHolidayListItemsUnFiltered, selectSortingHolidaysBy, (list, by) => {
+  return [...list.sort((lhs, rhs) => {
+    if (lhs[by] < rhs[by]) {
+      return -1;
+    }
+    if (lhs[by] > rhs[by]) {
+      return 1;
+    }
+    return 0;
+  })];
+});
+export const selectHolidayListItems = createSelector(selectShowAllHolidays, selectHolidayListSorted, (all, holidays) =>
   holidays.filter(h => all ? true : !h.past)
 );

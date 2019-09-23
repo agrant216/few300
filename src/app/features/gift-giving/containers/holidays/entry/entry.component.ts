@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { GiftGivingState } from '../../../reducers';
+import { holidayAdded } from '../../../actions/holidays.actions';
 
 @Component({
   selector: 'app-holiday-entry',
@@ -7,9 +10,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EntryComponent implements OnInit {
 
-  constructor() { }
+  constructor(private store: Store<GiftGivingState>) { }
 
   ngOnInit() {
   }
 
+  addItem(nameEl: HTMLInputElement, dateEl: HTMLInputElement) {
+    const name = nameEl.value;
+    const date = dateEl.valueAsDate.toISOString();
+    this.store.dispatch(holidayAdded({ name, date }));
+
+    nameEl.value = '';
+    dateEl.value = '';
+    nameEl.focus();
+  }
 }

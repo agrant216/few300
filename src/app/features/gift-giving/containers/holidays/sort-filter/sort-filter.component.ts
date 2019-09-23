@@ -25,4 +25,11 @@ export class SortFilterComponent implements OnInit {
   showOnlyUpcoming() {
     this.store.dispatch(actions.filterShowOnlyUpcoming());
   }
+
+  sortByName() {
+    this.store.dispatch(actions.sortHolidayByName());
+  }
+  sortByDate() {
+    this.store.dispatch(actions.sortHolidayByDate());
+  }
 }
