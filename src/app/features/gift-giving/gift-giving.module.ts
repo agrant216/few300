@@ -10,6 +10,9 @@ import { featureName, reducers } from './reducers';
 import { ListComponent } from './containers/holidays/list/list.component';
 import { EntryComponent } from './containers/holidays/entry/entry.component';
 import { SortFilterComponent } from './containers/holidays/sort-filter/sort-filter.component';
+import { EffectsModule } from '@ngrx/effects';
+import { AppEffects } from './effects/app.effects';
+import { SortFilterEffects } from './effects/sort-filter.effects';
 
 
 const routes: Routes = [
@@ -35,11 +38,19 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [GiftGivingComponent, DashboardComponent, HolidaysComponent, FriendsComponent, ListComponent, EntryComponent, SortFilterComponent],
+  declarations: [
+    GiftGivingComponent,
+    DashboardComponent,
+    HolidaysComponent,
+    FriendsComponent,
+    ListComponent,
+    EntryComponent,
+    SortFilterComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    StoreModule.forFeature(featureName, reducers)
+    StoreModule.forFeature(featureName, reducers),
+    EffectsModule.forFeature([AppEffects, SortFilterEffects])
   ]
 })
 export class GiftGivingModule { }
