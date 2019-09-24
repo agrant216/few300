@@ -1,1 +1,11 @@
-<p>friends works!</p>
+<header class="page-head">
+  <h3>Friends</h3>
+</header>
+<section class="alert alert-success"
+         *ngIf="!(friendsLoaded$ |async)">
+  <h2>Getting your data.</h2>
+</section>
+<section *ngIf="(friendsLoaded$ |async)">
+  <app-friend-entry></app-friend-entry>
+  <app-friend-list [model]="friends$ | async"></app-friend-list>
+</section>

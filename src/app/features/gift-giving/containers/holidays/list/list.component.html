@@ -4,6 +4,6 @@
       *ngFor='let day of model'>
     <h5>{{day.name}}</h5>
     <p>{{ day.date | date:'fullDate'}}</p>
-    <p>Saved: {{ !holiday.isTemporary }}</p>
+    <p>Saved: {{ !day.isTemporary }}</p>
   </li>
 </ul>

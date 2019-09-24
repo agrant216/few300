@@ -1,6 +1,7 @@
 export const featureName = 'giftGiving';
 import * as fromHolidays from './holidays.reducer';
 import * as fromUiHints from './ui-hints.reducer';
+import * as fromFriends from './friends.reducer';
 import { createFeatureSelector, createSelector, ActionReducerMap } from '@ngrx/store';
 import { GiftGivingModule } from '../gift-giving.module';
 import { HolidayListItem } from '../models';
@@ -8,11 +9,13 @@ import { HolidayListItem } from '../models';
 export interface GiftGivingState {
   holidays: fromHolidays.HolidayState;
   uiHints: fromUiHints.UiHintsState;
+  friends: fromFriends.FriendState;
 }
 
 export const reducers: ActionReducerMap<GiftGivingState> = {
   holidays: fromHolidays.reducer,
-  uiHints: fromUiHints.reducer
+  uiHints: fromUiHints.reducer,
+  friends: fromFriends.reducer
 };
 
 
@@ -22,14 +25,26 @@ const selectFeature = createFeatureSelector<GiftGivingState>(featureName);
 // Selector Per Branch (eg. one for the holidays)
 const selectHolidaysBranch = createSelector(selectFeature, b => b.holidays);
 const selectUiHintsBranch = createSelector(selectFeature, b => b.uiHints);
+const selectFriendsBranch = createSelector(selectFeature, b => b.friends);
 // 'Helpers'
+// Holidays
 const selectHolidayArray = createSelector(selectHolidaysBranch, fromHolidays.selectHolidayArray);
 export const selectShowAllHolidays = createSelector(selectUiHintsBranch, b => b.showAll);
 export const selectSortingHolidaysBy = createSelector(selectUiHintsBranch, b => b.sortHolidaysBy);
-// Then what your componenst need.
+// Friends
+const selectFriendArray = createSelector(selectFriendsBranch, fromFriends.selectFriendArray);
+// Then what your components need.
 
 export const selectHolidaysLoaded = createSelector(selectUiHintsBranch, b => b.holidaysLoaded);
+export const selectfriendsLoaded = createSelector(selectUiHintsBranch, b => b.friendsLoaded);
+
 // we need one that returns a HolidayListItem for our holiday list component
+
+export const selectFriendListItems = createSelector(selectFriendArray, friends =>
+  friends.map(f => ({
+    id: f.id,
+    name: f.name
+  })));
 
 const selectHolidayListItemsUnFiltered = createSelector(selectHolidayArray, holidays =>
   holidays.map(holiday => ({
