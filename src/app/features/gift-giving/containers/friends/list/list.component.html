@@ -1,4 +1,8 @@
 <ul class="list-group">
   <li class="list-group-item"
-      *ngFor="let friend of model">{{friend.name}}</li>
+      *ngFor="let friend of model">{{friend.name}}&nbsp;&nbsp;
+    <a class="btn btn-sm btn-primary"
+       [routerLink]="['/gifts','friends',friend.id,'holidays']">See Holidays!
+    </a>
+  </li>
 </ul>

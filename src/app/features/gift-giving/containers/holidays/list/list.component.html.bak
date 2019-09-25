@@ -1,0 +1,9 @@
+<ul class="list-unstyled">
+  <li class="alert"
+      [ngClass]="{'alert-success': !day.past, 'alert-info':day.past}"
+      *ngFor='let day of model'>
+    <h5>{{day.name}}</h5>
+    <p>{{ day.date | date:'fullDate'}}</p>
+    <p>Saved: {{ !day.isTemporary }}</p>
+  </li>
+</ul>

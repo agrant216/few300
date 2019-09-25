@@ -29,11 +29,11 @@ export const loadHolidaydata = createAction(
 );
 
 export const loadDataSucceeded = createAction(
-  '[gift giving] load data succeeded',
+  '[gift giving] load holiday data succeeded',
   props<{ data: HolidayEntity[] }>()
 );
 
 export const loadDataFailed = createAction(
-  '[gift giving] load data succeeded',
+  '[gift giving] load holiday data failed',
   props<{ message: string }>()
 );

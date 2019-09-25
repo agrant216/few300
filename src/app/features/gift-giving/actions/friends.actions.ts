@@ -28,11 +28,16 @@ export const loadFriendData = createAction(
 );
 
 export const loadDataSucceeded = createAction(
-  '[gift giving] load data succeeded',
+  '[gift giving] load friend data succeeded',
   props<{ data: FriendEntity[] }>()
 );
 
 export const loadDataFailed = createAction(
-  '[gift giving] load data succeeded',
+  '[gift giving] load friend data failed',
   props<{ message: string }>()
+);
+
+export const selectFriend = createAction(
+  '[gift giving] set selected friend',
+  props<{ id: string }>()
 );

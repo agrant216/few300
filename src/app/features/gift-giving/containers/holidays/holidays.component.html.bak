@@ -1,11 +1,11 @@
-<header class="page-header">
+<header class="page-head">
   <h3>Holidays</h3>
 </header>
 <section class="alert alert-success"
-         *ngIf="!(holidaysLoaded$ | async)">
-  <h2>Getting yer data.</h2>
+         *ngIf="!(holidaysLoaded$ |async)">
+  <h2>Getting your data.</h2>
 </section>
-<section *ngIf="holidaysLoaded$ | async">
+<section>
   <app-holiday-entry></app-holiday-entry>
   <app-sort-filter></app-sort-filter>
   <app-holiday-list [model]="holidays$ | async"></app-holiday-list>

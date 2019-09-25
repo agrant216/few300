@@ -5,6 +5,7 @@ import { pipe } from 'rxjs';
 import { tap, map, switchMap } from 'rxjs/operators';
 import * as sortFilterActions from '../actions/sort-filter.actions';
 import { loadHolidaydata } from '../actions/holidays.actions';
+import { loadFriendData } from '../actions/friends.actions';
 
 // hooks into the app started effect to kick off any feature specific effects
 
@@ -22,6 +23,12 @@ export class AppEffects {
     this.actions$.pipe(
       ofType(appActions.applicationStarted),
       map(() => loadHolidaydata())
+    ), { dispatch: true });
+
+  onAppStartLoadFriends$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(appActions.applicationStarted),
+      map(() => loadFriendData())
     ), { dispatch: true });
 
   constructor(private actions$: Actions) {

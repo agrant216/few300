@@ -10,12 +10,12 @@ import { of } from 'rxjs';
 @Injectable()
 export class FriendEffects {
 
-  postholiday$ = createEffect(() =>
+  postFriend$ = createEffect(() =>
     this.actions$.pipe(
       ofType(friendActions.friendAdded),
       map(a => a.entity),
       switchMap((originalEntity) =>
-        this.client.post<FriendEntity>(environment.holidayUrl, { name: originalEntity.name })
+        this.client.post<FriendEntity>(environment.friendUrl, { name: originalEntity.name })
           .pipe(
             map(response => friendActions.friendAddedSuccess({ oldId: originalEntity.id, newEntity: response }),
               catchError(err => of(friendActions.friendAddedFailure({ message: 'Could not Add that', entity: originalEntity })))
@@ -24,10 +24,10 @@ export class FriendEffects {
     )
   );
 
-  loadHolidayData$ = createEffect(() =>
+  loadFriendData$ = createEffect(() =>
     this.actions$.pipe(
       ofType(friendActions.loadFriendData),
-      switchMap(() => this.client.get<{ friends: FriendEntity[] }>(environment.holidayUrl)
+      switchMap(() => this.client.get<{ friends: FriendEntity[] }>(environment.friendUrl)
         .pipe(
           map(response => response.friends),
           map(friends => friendActions.loadDataSucceeded({ data: friends }))
