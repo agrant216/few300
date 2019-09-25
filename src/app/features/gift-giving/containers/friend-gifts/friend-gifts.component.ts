@@ -8,6 +8,7 @@ import { selectFriend } from '../../actions/friends.actions';
 import { FriendHoliday } from '../../models';
 import { assignHolidayToFriend } from '../../actions/friend-holiday.actions';
 
+
 @Component({
   selector: 'app-friend-gifts',
   templateUrl: './friend-gifts.component.html',
@@ -22,7 +23,7 @@ export class FriendGiftsComponent implements OnInit, OnDestroy {
   subscription: Subscription;
 
   ngOnInit() {
-    // TODO this.model$ = this.store.select(selectFriendHolidayModel);
+    this.model$ = this.store.select(selectFriendHolidayModel);
     // should be replaced with selector/observable
     this.subscription = this.activatedRoute.paramMap.pipe(
       map(params => {

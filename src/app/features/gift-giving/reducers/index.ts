@@ -41,8 +41,9 @@ export const selectSelectedFriendId = createSelector(selectFriendsBranch, b => b
 export const selectFriendEntities = createSelector(selectFriendsBranch, fromFriends.selectFriendEntities);
 
 export const selectFriendHolidayEntities = createSelector(selectFriendHolidayBranch, fromFriendHoliday.selectFriendHolidayEntities);
-export const selectFriendHolidayEntitiesForSelectedFriends = createSelector(selectFriendHolidayEntities,
-  (id, friend) => friend[id] ? friend[id].holidaysCelebrated : null);
+export const selectFriendHolidayEntitiesForSelectedFriend =
+  createSelector(selectSelectedFriendId, selectFriendHolidayEntities,
+    (id, friends) => friends[id] ? friends[id].holidaysCelebrated : null); // [...] | null
 
 export const selectSelectedFriend = createSelector(selectSelectedFriendId, selectFriendEntities,
   (id, entities) => entities[id]);
@@ -88,7 +89,7 @@ export const selectHolidayListItems = createSelector(selectShowAllHolidays, sele
 export const selectFriendHolidayModel = createSelector(
   selectSelectedFriend,
   selectHolidayListItemsUnFiltered,
-  selectFriendHolidayEntitiesForSelectedFriends,
+  selectFriendHolidayEntitiesForSelectedFriend,
   (friend, allHolidays, celebratedHolidays) => {
     celebratedHolidays = celebratedHolidays || [];
     const nonCelebrated = allHolidays
